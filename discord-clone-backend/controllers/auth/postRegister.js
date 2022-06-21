@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // [6] 회원가입 로직
 const postRegister = async (request, response) => {
@@ -24,7 +25,17 @@ const postRegister = async (request, response) => {
     });
 
     // [6] JWT TOKEN 생성
-    const token = 'JWT TOKEN';
+    // mongodb에 _id 프로퍼티가 자동으로 생성된다.
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        mail,
+      },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn: '24h',
+      },
+    );
 
     // [6] 성공 : 유저에게 토큰과 이메일, 유저이름 데이터를 넘겨준다
     response.status(201).json({
