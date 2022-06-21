@@ -15,7 +15,7 @@ const postLogin = async (request, response) => {
       return response.status(200).json({
         userDetails: {
           mail: user.mail,
-          token,
+          token: token,
           username: user.username,
         },
       });
