@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
+import AuthBox from "../../layouts/AuthBox";
 
 export default function RegisterPage() {
-  return <div>RegisterPage</div>;
+  return <AuthBox>register</AuthBox>;
 }
