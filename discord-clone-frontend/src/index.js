@@ -1,9 +1,10 @@
 import React from 'react';
+import App from './App';
+import './assets/css/index.css';
+
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import App from './App';
 import { store } from './store/store';
-import './assets/css/index.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root');
