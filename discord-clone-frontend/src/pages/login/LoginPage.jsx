@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import AuthBox from '../../layouts/AuthBox';
 import LoginBoxHeader from '../../components/login/LoginBoxHeader';
 import LoginInput from '../../components/login/LoginInput';
 import LoginBoxFooter from '../../components/login/LoginBoxFooter';
 import { validateLoginForm } from '../../assets/js/validators';
+import { postLogin } from '../../store/userDetailReducer';
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
@@ -17,8 +22,8 @@ export default function LoginPage() {
   }, [mail, password, setIsFormValid]);
 
   // 로그인 핸들러
-  const handleLogin = () => {
-    console.log(mail, password);
+  const handleLogin = async () => {
+    await dispatch(postLogin({ mail, password }));
   };
 
   return (

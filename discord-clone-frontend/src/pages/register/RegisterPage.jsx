@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Typography } from '@mui/material';
+import { validateRegisterForm } from '../../assets/js/validators';
+
 import RegisterInput from '../../components/register/RegisterInput';
 import AuthBox from '../../layouts/AuthBox';
 import RegisterFooter from '../../components/register/RegisterFooter';
-import { useEffect } from 'react';
-import { validateRegisterForm } from '../../assets/js/validators';
+import { postRegister } from '../../store/userDetailReducer';
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
+
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const handleRegister = () => {
-    console.log(username, mail, password);
+  const handleRegister = async () => {
+    await dispatch(postRegister({ username, mail, password }));
   };
 
   useEffect(() => {

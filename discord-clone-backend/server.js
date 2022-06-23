@@ -9,7 +9,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 
 // [1] 사용자 로컬 URI 또는 하드코딩 5002포트
-const PORT = process.env.PORT || process.env.API_PORT;
+const PORT = process.env.API_PORT || process.env.PORT;
 
 // [1] express로 json파싱, cors 라이브러리 사용
 const app = express();
