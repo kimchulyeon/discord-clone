@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+// CSS
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -28,8 +29,7 @@ const Input = styled.input`
   padding: 0 5px;
 `;
 
-export default function LabelInput(props) {
-  const { value, setValue, label, type, placeholder } = props;
+export default function LabelInput({ value, setValue, label, type, placeholder }) {
   const onInputChange = (e) => {
     setValue(e.target.value);
   };
