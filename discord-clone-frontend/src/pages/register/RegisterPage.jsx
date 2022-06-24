@@ -7,7 +7,7 @@ import { validateRegisterForm } from '../../assets/js/validators';
 import RegisterInput from '../../components/register/RegisterInput';
 import AuthBox from '../../layouts/AuthBox';
 import RegisterFooter from '../../components/register/RegisterFooter';
-import { postRegister } from '../../store/userDetailReducer';
+import { postRegister } from '../../store/index';
 
 export default function RegisterPage() {
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import LoginBoxHeader from '../../components/login/LoginBoxHeader';
 import LoginInput from '../../components/login/LoginInput';
 import LoginBoxFooter from '../../components/login/LoginBoxFooter';
 import { validateLoginForm } from '../../assets/js/validators';
-import { postLogin } from '../../store/userDetailReducer';
+import { postLogin } from '../../store/index';
 
 export default function LoginPage() {
   const dispatch = useDispatch();

@@ -29,3 +29,8 @@ export const validateRegisterForm = ({ mail, username, password }) => {
 
   return isMailValid && isPasswordValid && isUsernameValid; // true or false
 };
+
+export const logout = () => {
+  localStorage.clear();
+  window.location.pathname = '/login';
+};
