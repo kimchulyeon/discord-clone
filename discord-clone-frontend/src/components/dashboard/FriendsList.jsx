@@ -1,13 +1,40 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
+import FriendListItem from "./FriendListItem";
 
 const MainContainer = styled.div`
   flex-grow: 1;
   width: 100%;
 `;
 
+const DUMMY_FRIENDS = [
+  {
+    id: 1,
+    username: "Mark",
+    idOnline: true,
+  },
+  {
+    id: 2,
+    username: "Anna",
+    idOnline: false,
+  },
+  {
+    id: 3,
+    username: "John",
+    idOnline: false,
+  },
+];
+
 function FriendsList() {
-  return <MainContainer></MainContainer>;
+  return (
+    <MainContainer>
+      {DUMMY_FRIENDS.map((friend) => {
+        return (
+          <FriendListItem key={friend.id} username={friend.username} isOnline={friend.isOnline} />
+        );
+      })}
+    </MainContainer>
+  );
 }
 
 export default FriendsList;

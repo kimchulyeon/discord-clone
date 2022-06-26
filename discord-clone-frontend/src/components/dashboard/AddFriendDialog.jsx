@@ -1,17 +1,20 @@
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { DialogTitle, Typography } from '@mui/material';
-import LabelInput from '../../layouts/LabelInput';
+import React, { useState, useEffect } from "react";
+import {
+  DialogTitle,
+  Typography,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
+import LabelInput from "../../layouts/LabelInput";
 
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { validateMail } from '../../assets/js/validators';
+import { validateMail } from "../../assets/js/validators";
+import CustomPrimaryBtn from "../../layouts/CustomPrimaryBtn";
 
 function AddFriendDialog({ isDialogOpen, closeDialogHandler, sendFriendInvitation = () => {} }) {
-  const [mail, setMail] = useState('');
-  const [isFormValid, setIsFormValid] = useState('');
+  const [mail, setMail] = useState("");
+  const [isFormValid, setIsFormValid] = useState("");
 
   const handleSendInvitation = () => {
     //send friend request to server
@@ -19,7 +22,7 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler, sendFriendInvitatio
 
   const handleCloseDialog = () => {
     closeDialogHandler();
-    setMail('');
+    setMail("");
   };
 
   useEffect(() => {
@@ -44,6 +47,18 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler, sendFriendInvitatio
             placeholder="Enter mail address"
           />
         </DialogContent>
+        <DialogActions>
+          <CustomPrimaryBtn
+            onClick={handleSendInvitation}
+            disabled={!isFormValid}
+            label="Send"
+            additionalStyles={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginBottom: "10px",
+            }}
+          />
+        </DialogActions>
       </Dialog>
     </div>
   );
