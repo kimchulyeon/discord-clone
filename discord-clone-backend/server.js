@@ -5,6 +5,8 @@ const cors = require('cors'); // cors 라이브러리 cors 에러 처리(?)
 const mongoose = require('mongoose'); // mongodb 연결 라이브러리
 require('dotenv').config();
 
+const socketServer = require('./socketServer'); // 📡[소켓 서버]
+
 // [2] authRoutes.js 서버 라우트 : 파라미터? 생성
 const authRoutes = require('./routes/authRoutes');
 
@@ -22,6 +24,7 @@ app.use('/api/auth', authRoutes);
 
 // [1] 서버 열기
 const server = http.createServer(app);
+socketServer.registerSocketServer(server); // 생성한 서버에 📡[소켓 서버]를 연다
 
 // [1] mongodb 연결 | 성공, 에러 처리
 mongoose
