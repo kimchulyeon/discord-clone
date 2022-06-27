@@ -7,6 +7,7 @@ import FriendsSidebar from '../../components/dashboard/FriendsSidebar';
 import { logout } from '../../assets/js/validators';
 import { setUserDetail } from '../../store';
 import { useDispatch } from 'react-redux';
+import { connectWithSocketServer } from '../../realTimeCommunication/socketConnection';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,6 +26,7 @@ export default function Dashboard() {
     } else {
       // userDetail 전역 상태를 localStorage에 저장된 정보로 변경
       dispatch(setUserDetail(JSON.parse(userDetail)));
+      connectWithSocketServer(); // 📡소켓 서버에 연결
     }
   }, []);
 
