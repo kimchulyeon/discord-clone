@@ -79,7 +79,7 @@ const SLICE = createSlice({
   },
 
   extraReducers: {
-    // 회원가입
+    // 회원가입o===============================================================================================================
     [postRegister.pending]: (state) => {
       state.showAlert = false;
       state.alertMessageContent = '';
@@ -97,7 +97,7 @@ const SLICE = createSlice({
       state.showAlert = true;
       state.alertMessageContent = action.payload; // 회원가입 실패 시 alert창 o=======o  action.payload === err data
     },
-    // 로그인
+    // 로그인o=================================================================================================================
     [postLogin.pending]: (state) => {
       state.loading = true;
       state.alertMessageContent = '';
@@ -115,7 +115,7 @@ const SLICE = createSlice({
       state.showAlert = true;
       state.alertMessageContent = action.payload; // 로그인 실패 시 alert창 o=======o  action.payload === err data
     },
-    // 친구초대
+    // 친구초대o================================================================================================================
     [postFriendInvitation.pending]: (state) => {
       state.alertMessageContent = '';
     },
