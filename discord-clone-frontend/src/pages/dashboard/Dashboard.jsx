@@ -24,8 +24,7 @@ export default function Dashboard() {
     if (!userDetail) {
       logout(); // localStorage유저 정보가 없으면 로그아웃
     } else {
-      // userDetail 전역 상태를 localStorage에 저장된 정보로 변경
-      dispatch(setUserDetail(JSON.parse(userDetail)));
+      dispatch(setUserDetail(JSON.parse(userDetail))); // userDetail 전역 상태를 localStorage에 저장된 정보로 변경
       connectWithSocketServer(JSON.parse(userDetail)); // 📡소켓 서버에 연결 | 유저 정보를 넘겨준다
     }
   }, []);
