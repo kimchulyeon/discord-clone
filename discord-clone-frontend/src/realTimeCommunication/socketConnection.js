@@ -1,13 +1,19 @@
 import io from 'socket.io-client';
 
-let SOCKET = null;
+let socket = null;
 
-export const connectWithSocketServer = () => {
-  SOCKET = io('http://localhost:5002'); // 서버 URL과 연결
+export const connectWithSocketServer = (userDetail) => {
+  const jwtToken = userDetail.token;
 
-  // 소켓서버와 연결되었을 때
-  SOCKET.on('connect', () => {
+  socket = io('http://localhost:5002', {
+    auth: {
+      token: jwtToken,
+    },
+  }); // 서버 URL과 연결
+
+  // 클라이언트가 소켓서버와 연결되었을 때
+  socket.on('connect', () => {
     console.log('successfully connected with socket.io server');
-    console.log(SOCKET.id);
+    console.log(socket.id); // 클라이언트 ID
   });
 };

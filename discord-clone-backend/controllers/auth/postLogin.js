@@ -10,6 +10,7 @@ const postLogin = async (request, response) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // send new TOKEN
+      // sign : https://github.com/auth0/node-jsonwebtoken 문서 참고
       const token = jwt.sign(
         {
           userId: user._id,

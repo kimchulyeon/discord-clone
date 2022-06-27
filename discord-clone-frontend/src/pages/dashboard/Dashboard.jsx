@@ -26,7 +26,7 @@ export default function Dashboard() {
     } else {
       // userDetail 전역 상태를 localStorage에 저장된 정보로 변경
       dispatch(setUserDetail(JSON.parse(userDetail)));
-      connectWithSocketServer(); // 📡소켓 서버에 연결
+      connectWithSocketServer(JSON.parse(userDetail)); // 📡소켓 서버에 연결 | 유저 정보를 넘겨준다
     }
   }, []);
 
