@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, register } from '../api/axios';
+import { login, register, sendFriendInvitation } from '../api/axios';
 
 import history from '../custom/history';
 
@@ -11,8 +11,14 @@ const initialState = {
   error: false,
   showAlert: false,
   alertMessageContent: null,
+  friends: [],
+  pendingFriendsInvitation: [],
+  onlineUsers: [],
 };
-
+/**
+ *===========createAsyncThunk===========
+ * rejectWithValue : https://redux-toolkit.js.org/api/createAsyncThunk 문서 참고 : extraReducer에서 [rejected] 되었을 때 리턴 값
+ **/
 // 회원가입 THUNK========================================================================================================
 export const postRegister = createAsyncThunk('POST/REGISTER', async (userDetail, { rejectWithValue }) => {
   const response = await register(userDetail);
@@ -27,13 +33,23 @@ export const postRegister = createAsyncThunk('POST/REGISTER', async (userDetail,
 export const postLogin = createAsyncThunk('POST/LOGIN', async (user, { rejectWithValue }) => {
   const response = await login(user);
   try {
-    return response?.data.userDetails;
+    // return response?.data.userDetails;
   } catch (err) {
     return rejectWithValue(response.response.data);
   }
 });
 
-// Slice=================================================================================================================
+// 친구 초대 THUNK=========================================================================================================
+export const postFriendInvitation = createAsyncThunk('POST/INVITAION', async (data, { rejectWithValue }) => {
+  const response = await sendFriendInvitation(data);
+
+  try {
+  } catch (error) {
+    return rejectWithValue(response.response.data);
+  }
+});
+
+// Slice==================================================================================================================
 const SLICE = createSlice({
   name: 'stores',
   initialState, // state 객체
@@ -50,6 +66,15 @@ const SLICE = createSlice({
     // userDetail 상태 변경
     setUserDetail(state, action) {
       state.userDetail = action.payload;
+    },
+    setFriends(state, action) {
+      state.friends = action.payload;
+    },
+    setPendingFriendsInvitation(state, action) {
+      state.pendingFriendsInvitation = action.payload;
+    },
+    setOnlineUsers(state, action) {
+      state.onlineUsers = action.payload;
     },
   },
 
@@ -70,7 +95,7 @@ const SLICE = createSlice({
       state.loading = true;
       state.error = true;
       state.showAlert = true;
-      state.alertMessageContent = action.payload; // 회원가입 실패 시 alert창
+      state.alertMessageContent = action.payload; // 회원가입 실패 시 alert창 o=======o  action.payload === err data
     },
     // 로그인
     [postLogin.pending]: (state) => {
@@ -88,10 +113,29 @@ const SLICE = createSlice({
       state.loading = true;
       state.error = true;
       state.showAlert = true;
-      state.alertMessageContent = action.payload; // 로그인 실패 시 alert창
+      state.alertMessageContent = action.payload; // 로그인 실패 시 alert창 o=======o  action.payload === err data
+    },
+    // 친구초대
+    [postFriendInvitation.pending]: (state) => {
+      state.alertMessageContent = '';
+    },
+    [postFriendInvitation.fulfilled]: (state) => {
+      state.alertMessageContent = 'Invitation has been sent!';
+    },
+    [postFriendInvitation.rejected]: (state, action) => {
+      state.showAlert = true;
+      state.alertMessageContent = action.payload; // 로그인 실패 시 alert창 o=======o  action.payload === err data
     },
   },
 });
 
-export const { setShowAlert, setAlertMessage, setUserDetail } = SLICE.actions; // reducer
+export const {
+  setShowAlert,
+  setAlertMessage,
+  setUserDetail,
+  setFriends,
+  setPendingFriendsInvitation,
+  setOnlineUsers,
+} = SLICE.actions; // reducer
+
 export default SLICE.reducer; // store.js 프로퍼티

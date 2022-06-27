@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   DialogTitle,
   Typography,
@@ -6,23 +6,32 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-} from "@mui/material";
-import LabelInput from "../../layouts/LabelInput";
+} from '@mui/material';
+import LabelInput from '../../layouts/LabelInput';
 
-import { validateMail } from "../../assets/js/validators";
-import CustomPrimaryBtn from "../../layouts/CustomPrimaryBtn";
+import { validateMail } from '../../assets/js/validators';
+import CustomPrimaryBtn from '../../layouts/CustomPrimaryBtn';
 
-function AddFriendDialog({ isDialogOpen, closeDialogHandler, sendFriendInvitation = () => {} }) {
-  const [mail, setMail] = useState("");
-  const [isFormValid, setIsFormValid] = useState("");
+import { postFriendInvitation } from '../../store/index';
+import { useDispatch } from 'react-redux';
 
+function AddFriendDialog({ isDialogOpen, closeDialogHandler }) {
+  const [mail, setMail] = useState('');
+  const [isFormValid, setIsFormValid] = useState('');
+  const dispatch = useDispatch();
+
+  // 친구 초대 버튼 클릭o========================================================================
   const handleSendInvitation = () => {
-    //send friend request to server
+    dispatch(
+      postFriendInvitation({
+        mail: mail,
+      }),
+    );
   };
-
+  //===========================================================================================
   const handleCloseDialog = () => {
     closeDialogHandler();
-    setMail("");
+    setMail('');
   };
 
   useEffect(() => {
@@ -53,9 +62,9 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler, sendFriendInvitatio
             disabled={!isFormValid}
             label="Send"
             additionalStyles={{
-              marginLeft: "15px",
-              marginRight: "15px",
-              marginBottom: "10px",
+              marginLeft: '15px',
+              marginRight: '15px',
+              marginBottom: '10px',
             }}
           />
         </DialogActions>

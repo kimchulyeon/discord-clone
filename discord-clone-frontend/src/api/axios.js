@@ -42,6 +42,19 @@ export const register = async (data) => {
   }
 };
 
+// 친구초대o================================================================================================================
+export const sendFriendInvitation = async (data) => {
+  try {
+    return await instance.post('/friend-invitation/invite', data);
+  } catch (err) {
+    checkResponseCode();
+    return {
+      error: true,
+      err,
+    };
+  }
+};
+
 function checkResponseCode(err) {
   const responseCode = err?.response?.status;
 
