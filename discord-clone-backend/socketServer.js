@@ -1,3 +1,4 @@
+const disconnectServer = require('./disconnectHandler');
 const authSocket = require('./middleware/authSocket');
 const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
 
@@ -20,6 +21,11 @@ const registerSocketServer = (serverURL) => {
     console.log(socket.id);
 
     newConnectionHandler(socket, io); // connectedUsers Map 자료형에 새로운 유저 정보 저장
+
+    // 유저가 소켓 서버에 연결해제되었을 때
+    socket.on('disconnect', () => {
+      disconnectServer(socket); //connectUsers Map 자료형에서 제거
+    });
   });
 };
 
