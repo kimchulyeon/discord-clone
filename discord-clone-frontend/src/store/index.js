@@ -47,6 +47,10 @@ const SLICE = createSlice({
     setAlertMessage(state, action) {
       state.alertMessageContent = action.payload;
     },
+    // userDetail 상태 변경
+    setUserDetail(state, action) {
+      state.userDetail = action.payload;
+    },
   },
 
   extraReducers: {
@@ -89,5 +93,5 @@ const SLICE = createSlice({
   },
 });
 
-export const { setShowAlert, setAlertMessage } = SLICE.actions; // reducer
+export const { setShowAlert, setAlertMessage, setUserDetail } = SLICE.actions; // reducer
 export default SLICE.reducer; // store.js 프로퍼티

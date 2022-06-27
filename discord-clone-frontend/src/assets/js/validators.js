@@ -1,3 +1,5 @@
+import history from '../../custom/history';
+
 // 비밀번호 VALID
 const validatePassword = (password) => {
   return password.length > 5 && password.length < 12;
@@ -31,6 +33,6 @@ export const validateRegisterForm = ({ mail, username, password }) => {
 };
 
 export const logout = () => {
+  history.push('/login');
   localStorage.clear();
-  window.location.pathname = "/login";
 };
