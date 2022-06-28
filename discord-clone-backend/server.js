@@ -5,10 +5,12 @@ const cors = require('cors'); // cors 라이브러리 cors 에러 처리(?)
 const mongoose = require('mongoose'); // mongodb 연결 라이브러리
 require('dotenv').config();
 
-const socketServer = require('./socketServer'); // 📡[소켓 서버]
+//o=========================================================📡[소켓 서버]o===================================================
+const socketServer = require('./socketServer');
 
 // [2] authRoutes.js 서버 라우트 : 파라미터? 생성
 const authRoutes = require('./routes/authRoutes');
+const friendInvitationRoutes = require('./routes/friendInvitationRoutes');
 
 // [1] 사용자 로컬 URI 또는 하드코딩 5002포트
 const PORT = process.env.API_PORT || process.env.PORT;
@@ -18,15 +20,19 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// [2] register the Routes
+// [2] Routes===============================================================================================================
 // 서버 BASE_URL + param을 http://localhost:5002/api/auth로 설정 | params는 authRoutes.js에 설정
 app.use('/api/auth', authRoutes);
+// 서버 BASE_URL + param을 http://localhost:5002/api/invite로 설정 | params는 friendInvitationRoutes.js에 설정
+app.use('/api/friend-invitation', friendInvitationRoutes);
+// ==========================================================================================================================
 
-// [1] 서버 열기
+// [1] 서버 열기o=============================================================================================================
 const server = http.createServer(app);
 socketServer.registerSocketServer(server); // 생성한 서버에 📡[소켓 서버]를 연다
+// ==========================================================================================================================
 
-// [1] mongodb 연결 | 성공, 에러 처리
+// [1] mongodb 연결 | 성공, 에러 처리o==========================================================================================
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

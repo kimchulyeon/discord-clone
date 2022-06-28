@@ -25,9 +25,10 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler }) {
     dispatch(
       // 친구추가 POST
       postFriendInvitation({
-        mail: mail,
+        targetMail: mail,
       }),
     );
+    handleCloseDialog();
   };
   //===========================================================================================
   const handleCloseDialog = () => {

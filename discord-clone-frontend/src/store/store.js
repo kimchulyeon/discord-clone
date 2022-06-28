@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import SLICE from './index';
 /**
  * index.js에 Provider로 전달
@@ -8,4 +8,7 @@ export const store = configureStore({
   reducer: {
     SLICE,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });

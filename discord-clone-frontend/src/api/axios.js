@@ -3,7 +3,7 @@ import { logout } from '../assets/js/validators';
 
 // instance===============================================================================================================
 const instance = axios.create({
-  baseURL: 'http://localhost:5002/api/auth/',
+  baseURL: 'http://localhost:5002/api/',
   timeout: 1000,
 });
 
@@ -28,7 +28,7 @@ instance.interceptors.request.use(
 // login===================================================================================================================
 export const login = async (data) => {
   try {
-    return await instance.post('login', data);
+    return await instance.post('auth/login', data);
   } catch (err) {
     return err;
   }
@@ -38,7 +38,7 @@ export const login = async (data) => {
 // register=================================================================================================================
 export const register = async (data) => {
   try {
-    return await instance.post('register', data);
+    return await instance.post('auth/register', data);
   } catch (err) {
     return err;
   }
@@ -48,7 +48,7 @@ export const register = async (data) => {
 // 친구초대o=================================================================================================================
 export const sendFriendInvitation = async (data) => {
   try {
-    return await instance.post('/friend-invitation/invite', data);
+    return await instance.post('friend-invitation/invite', data);
   } catch (err) {
     checkResponseCode();
     return {

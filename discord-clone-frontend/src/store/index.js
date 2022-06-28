@@ -33,7 +33,7 @@ export const postRegister = createAsyncThunk('POST/REGISTER', async (userDetail,
 export const postLogin = createAsyncThunk('POST/LOGIN', async (user, { rejectWithValue }) => {
   const response = await login(user);
   try {
-    // return response?.data.userDetails;
+    return response?.data.userDetails;
   } catch (err) {
     return rejectWithValue(response.response.data);
   }
@@ -44,6 +44,7 @@ export const postFriendInvitation = createAsyncThunk('POST/INVITAION', async (da
   const response = await sendFriendInvitation(data);
 
   try {
+    return response;
   } catch (error) {
     return rejectWithValue(response.response.data);
   }
@@ -100,6 +101,7 @@ const SLICE = createSlice({
     // 로그인o=================================================================================================================
     [postLogin.pending]: (state) => {
       state.loading = true;
+      state.showAlert = false;
       state.alertMessageContent = '';
     },
     [postLogin.fulfilled]: (state, action) => {
@@ -118,13 +120,16 @@ const SLICE = createSlice({
     // 친구초대o================================================================================================================
     [postFriendInvitation.pending]: (state) => {
       state.alertMessageContent = '';
+      state.showAlert = false;
     },
-    [postFriendInvitation.fulfilled]: (state) => {
-      state.alertMessageContent = 'Invitation has been sent!';
+    [postFriendInvitation.fulfilled]: (state, action) => {
+      // state.alertMessageContent = 'Invitation has been sent!';
+      state.showAlert = true;
+      state.alertMessageContent = action.payload.data;
     },
     [postFriendInvitation.rejected]: (state, action) => {
       state.showAlert = true;
-      state.alertMessageContent = action.payload; // 로그인 실패 시 alert창 o=======o  action.payload === err data
+      state.alertMessageContent = action.payload;
     },
   },
 });
