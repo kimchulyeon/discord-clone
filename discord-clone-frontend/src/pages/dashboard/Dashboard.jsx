@@ -31,9 +31,13 @@ export default function Dashboard() {
 
   return (
     <Wrapper>
+      {/* 사이드바 */}
       <Sidebar />
+      {/* 친구목록 */}
       <FriendsSidebar />
+      {/* 메신저 창 */}
       <Messenger />
+      {/* 상단 바 */}
       <AppBar />
     </Wrapper>
   );

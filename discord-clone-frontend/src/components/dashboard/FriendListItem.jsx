@@ -20,6 +20,7 @@ function FriendListItem({ username, isOnline }) {
     >
       {/* 사용자 아이콘 */}
       <Avatar username={username} />
+      {/* 이름 */}
       <Typography
         style={{
           marginLeft: '7px',

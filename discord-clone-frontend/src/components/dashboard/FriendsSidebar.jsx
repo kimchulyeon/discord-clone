@@ -17,10 +17,15 @@ const MainContainer = styled.div`
 function FriendsSidebar() {
   return (
     <MainContainer>
+      {/* 친구추가 버튼 */}
       <AddFriendbutton />
+      {/* 친구목록 타이틀 */}
       <FriendsTitle title="Private Messages" />
+      {/* 친구목록 리스트 */}
       <FriendsList />
+      {/* 친구목록 타이틀 */}
       <FriendsTitle title="Invitations" />
+      {/* 초대 리스트 */}
       <PendingInvitationsList />
     </MainContainer>
   );

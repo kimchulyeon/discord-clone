@@ -16,7 +16,7 @@ const initialState = {
   onlineUsers: [],
 };
 /**
- *===========createAsyncThunk===========
+ *===========::::::::createAsyncThunk::::::::===========
  * rejectWithValue : https://redux-toolkit.js.org/api/createAsyncThunk 문서 참고 : extraReducer에서 [rejected] 되었을 때 리턴 값
  **/
 // 회원가입 THUNK========================================================================================================

@@ -23,6 +23,7 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler }) {
   // 친구 초대 버튼 클릭o========================================================================
   const handleSendInvitation = () => {
     dispatch(
+      // 친구추가 POST
       postFriendInvitation({
         mail: mail,
       }),
@@ -48,6 +49,7 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler }) {
           <DialogContentText>
             <Typography>Enter e-mail address of friend which you would like to invite</Typography>
           </DialogContentText>
+          {/* 이메일 입력 인풋 */}
           <LabelInput
             label="Mail"
             type="text"
@@ -56,6 +58,7 @@ function AddFriendDialog({ isDialogOpen, closeDialogHandler }) {
             placeholder="Enter mail address"
           />
         </DialogContent>
+        {/* 버튼 */}
         <DialogActions>
           <CustomPrimaryBtn
             onClick={handleSendInvitation}
